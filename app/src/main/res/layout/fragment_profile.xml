@@ -69,7 +69,7 @@
             android:layout_below="@+id/profilePic"
             android:layout_centerHorizontal="true">
 
-            <!-- Workout Card -->
+            <!-- Weight Card -->
             <RelativeLayout
                 android:id="@+id/weightWrapper"
                 android:layout_width="170dp"

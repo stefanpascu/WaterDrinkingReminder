@@ -1,15 +1,16 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="40dp">
 
     <TextView
         android:id="@+id/editWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Edidit current weight"
-        android:textSize="25sp"/>
+        android:text="Edit current weight"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/kg"
@@ -23,23 +24,28 @@
 
     <EditText
         android:id="@+id/inputWeight"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/kg"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="" />
+        android:layout_height="50dp"
+        android:layout_below="@+id/kg"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/input"
+        android:elevation="10dp"
+        android:inputType="number"
+        android:paddingHorizontal="40dp"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 
     <android.widget.Button
         android:id="@+id/okBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputWeight"
-        android:layout_marginTop="10dp"
         android:layout_alignParentRight="true"
-        android:background="@color/cardview_shadow_end_color"
+        android:layout_marginTop="18dp"
+        android:background="@color/white"
         android:text="ok"
+        android:textSize="20sp"
         android:textColor="#17AFDA" />
 
     <android.widget.Button
@@ -47,11 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputWeight"
+        android:layout_marginTop="18dp"
         android:layout_toLeftOf="@+id/okBtn"
-        android:layout_marginTop="10dp"
-        android:background="@color/cardview_shadow_end_color"
+        android:background="@color/white"
         android:text="cancel"
-        android:textColor="#17AFDA" />
+        android:textColor="#17AFDA"
+        android:textSize="20dp" />
 
 </RelativeLayout>
 

@@ -99,6 +99,8 @@ public class Measurements extends AppCompatActivity {
         user.put("weight", weight);
         user.put("birthDate", bd);
         user.put("sex", selectedSex);
+        user.put("intake", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
+        user.put("intakeLeft", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
 
         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

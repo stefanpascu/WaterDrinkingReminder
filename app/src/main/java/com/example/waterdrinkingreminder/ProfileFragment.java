@@ -1,12 +1,16 @@
 package com.example.waterdrinkingreminder;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -34,8 +38,14 @@ public class ProfileFragment extends Fragment {
     TextView ageValue;
     TextView sexValue;
     TextView unitValue;
+    RelativeLayout weightWrapper;
+    RelativeLayout ageWrapper;
+    RelativeLayout sexWrapper;
+    RelativeLayout unitWrapper;
 
+    private Dialog dialog;
     private Button logoutBtn;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +59,11 @@ public class ProfileFragment extends Fragment {
         unitValue = getView().findViewById(R.id.unitValue);
         sexValue = getView().findViewById(R.id.sexValue);
         ageValue = getView().findViewById(R.id.ageValue);
+
+        weightWrapper = getView().findViewById(R.id.weightWrapper);
+        ageWrapper = getView().findViewById(R.id.ageWrapper);
+        sexWrapper = getView().findViewById(R.id.sexWrapper);
+        unitWrapper = getView().findViewById(R.id.unitWrapper);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStore = FirebaseFirestore.getInstance();
@@ -66,9 +81,28 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        dialog = new Dialog(this.getActivity());
+        dialog.setContentView(R.layout.dialog_edit_weight);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(this.getActivity().getDrawable(R.drawable.input));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_animation; //Setting the animations to dialog
+
+        Button okBtn = dialog.findViewById(R.id.okBtn);
+        Button cancelBtn = dialog.findViewById(R.id.cancelBtn);
 
         logoutBtn = getView().findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(v -> logout());
+
+        weightWrapper.setOnClickListener(v -> {
+            dialog.show();
+            EditText input = dialog.findViewById(R.id.inputWeight);
+            input.setText(weightValue.getText());
+        }); // Showing the dialog here);
+        okBtn.setOnClickListener(v -> updateWeight());
+        cancelBtn.setOnClickListener(v -> dialog.dismiss());
     }
 
     private void logout() {
@@ -77,4 +111,14 @@ public class ProfileFragment extends Fragment {
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
     }
+
+    private void updateWeight(){
+        EditText input = dialog.findViewById(R.id.inputWeight);
+        String updatedWeight = input.getText().toString();
+        DocumentReference documentReference = firebaseStore.collection("users").document(userId);
+        documentReference.update("weight", updatedWeight);
+        weightValue.setText(updatedWeight);
+        dialog.dismiss();
+    }
+
 }
