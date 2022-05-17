@@ -21,9 +21,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private static final String TAG = "RecyclerAdapter";
     ArrayList<String> moviesList;
+    ArrayList<Drawable> containerList;
 
-    public RecyclerAdapter(ArrayList<String> moviesList) {
+    public RecyclerAdapter(ArrayList<String> moviesList, ArrayList<Drawable> containerList) {
         this.moviesList = moviesList;
+        this.containerList = containerList;
     }
 
     @NonNull
@@ -37,9 +39,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.rowCountTextView.setText(String.valueOf(position));
         holder.textView.setText(moviesList.get(position));
-//        holder.imageView.setImageDrawable(res);
+        holder.imageView.setBackground(containerList.get(position));
     }
 
     @Override
@@ -57,18 +58,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
             imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
-            rowCountTextView = itemView.findViewById(R.id.rowCountTextView);
 
             itemView.setOnClickListener(this);
-
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    moviesList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
-                    return true;
-                }
-            });
 
         }
 

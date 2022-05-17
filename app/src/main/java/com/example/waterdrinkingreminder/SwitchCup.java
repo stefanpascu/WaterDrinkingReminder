@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Telephony;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class SwitchCup extends AppCompatActivity {
     RecyclerAdapter recyclerAdapter;
 
     ArrayList<String> moviesList;
+    ArrayList<Drawable> containerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +24,10 @@ public class SwitchCup extends AppCompatActivity {
         setContentView(R.layout.activity_switch_cup);
 
         moviesList = new ArrayList<>();
+        containerList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(moviesList);
+        recyclerAdapter = new RecyclerAdapter(moviesList, containerList);
 
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -33,28 +37,49 @@ public class SwitchCup extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        moviesList.add("Iron Man");
-        moviesList.add("The Incredible Hulk");
-        moviesList.add("Iron Man 2");
-        moviesList.add("Thor");
-        moviesList.add("Captain America: The First Avenger");
-        moviesList.add("The Avengers");
-        moviesList.add("Iron Man 3");
-        moviesList.add("Thor: The Dark World");
-        moviesList.add("Captain America: The Winter Soldier");
-        moviesList.add("Guardians of the Galaxy");
-        moviesList.add("Avengers: Age of Ultron");
-        moviesList.add("Ant-Man");
-        moviesList.add("Captain America: Civil War");
-        moviesList.add("Doctor Strange");
-        moviesList.add("Guardians of the Galaxy Vol. 2");
-        moviesList.add("Spider-Man: Homecoming");
-        moviesList.add("Thor: Ragnarok");
-        moviesList.add("Black Panther");
-        moviesList.add("Avengers: Infinity War");
-        moviesList.add("Ant-Man and the Wasp");
-        moviesList.add("Captain Marvel");
-        moviesList.add("Avengers: Endgame");
-        moviesList.add("Spider-Man: Far From Home");
+        moviesList.add("50 ml");
+        moviesList.add("75 ml");
+        moviesList.add("100 ml");
+        moviesList.add("125 ml");
+        moviesList.add("150 ml");
+        moviesList.add("175 ml");
+        moviesList.add("200 ml");
+        moviesList.add("225 ml");
+        moviesList.add("250 ml");
+        moviesList.add("275 ml");
+        moviesList.add("300 ml");
+        moviesList.add("325 ml");
+        moviesList.add("350 ml");
+        moviesList.add("375 ml");
+        moviesList.add("400 ml");
+        moviesList.add("425 ml");
+        moviesList.add("450 ml");
+        moviesList.add("475 ml");
+        moviesList.add("500 ml");
+        moviesList.add("750 ml");
+        moviesList.add("1000 ml");
+
+        containerList.add(getDrawable(R.drawable.ic_cup1));
+        containerList.add(getDrawable(R.drawable.ic_cup1));
+        containerList.add(getDrawable(R.drawable.ic_cup1));
+        containerList.add(getDrawable(R.drawable.ic_cup2));
+        containerList.add(getDrawable(R.drawable.ic_cup2));
+        containerList.add(getDrawable(R.drawable.ic_cup2));
+        containerList.add(getDrawable(R.drawable.ic_cup3));
+        containerList.add(getDrawable(R.drawable.ic_cup3));
+        containerList.add(getDrawable(R.drawable.ic_cup3));
+        containerList.add(getDrawable(R.drawable.ic_cup4));
+        containerList.add(getDrawable(R.drawable.ic_cup4));
+        containerList.add(getDrawable(R.drawable.ic_cup4));
+        containerList.add(getDrawable(R.drawable.ic_cup5));
+        containerList.add(getDrawable(R.drawable.ic_cup5));
+        containerList.add(getDrawable(R.drawable.ic_cup5));
+        containerList.add(getDrawable(R.drawable.ic_cup6));
+        containerList.add(getDrawable(R.drawable.ic_cup6));
+        containerList.add(getDrawable(R.drawable.ic_cup6));
+        containerList.add(getDrawable(R.drawable.ic_cup7));
+        containerList.add(getDrawable(R.drawable.ic_cup7));
+        containerList.add(getDrawable(R.drawable.ic_cup7));
+
     }
 }
