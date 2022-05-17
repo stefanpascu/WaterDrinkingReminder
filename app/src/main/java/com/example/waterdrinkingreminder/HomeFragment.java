@@ -166,13 +166,6 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();//logout
-        Intent i = new Intent(getActivity(), MainActivity.class);
-        startActivity(i);
-        ((Activity) getActivity()).overridePendingTransition(0, 0);
-    }
-
 }
 
 
