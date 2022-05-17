@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Measurements"
+    android:background="@drawable/formgradient">
+
+    <RelativeLayout
+        android:id="@+id/loginWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/loginwrapper"
+        android:elevation="4dp"
+        android:padding="35dp">
+
+        <TextView
+            android:id="@+id/measurementsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Measurements"
+            android:textColor="#505050"
+            android:textSize="36sp"/>
+
+        <EditText
+            android:id="@+id/heightInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/measurementsHeader"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:fontFamily="@font/roboto_italic"
+            android:hint="Height"
+            android:padding="15dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/weightInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heightInput"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:fontFamily="@font/roboto_italic"
+            android:hint="Weight"
+            android:padding="15dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/ageInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/weightInput"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:fontFamily="@font/roboto_italic"
+            android:hint="Birth Date (dd-mm-yyyy)"
+            android:inputType="date"
+            android:padding="15dp"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/radioBtnGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ageInput"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/maleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="100dp"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/custom_radio"
+                android:fontFamily="@font/roboto_bold"
+                android:text=" male"
+                android:textColor="#005B74"
+                android:textSize="22sp" />
+
+
+            <RadioButton
+                android:id="@+id/femaleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="false"
+                android:drawableLeft="@drawable/custom_radio"
+                android:fontFamily="@font/roboto_bold"
+                android:text=" female"
+                android:textColor="#005B74"
+                android:textSize="22sp" />
+
+        </RadioGroup>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioBtnGroup"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/loginbutton"
+            android:fontFamily="@font/roboto_light"
+            android:padding="22dp"
+            android:text="submit"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeScreen"
+    android:background="#EDEDED">
+
+    <!-- Calorie Circle -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/progressWrapper">
+
+        <RelativeLayout
+            android:id="@+id/progressBarBackground"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_calorie_bg">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:background="@drawable/inner_calorie_circle"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/calorie_circle" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/nrKcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1920"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:textSize="40sp"/>
+
+        <TextView
+            android:id="@+id/nrKcalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/nrKcal"
+            android:layout_marginTop="100dp"
+            android:text="kcal"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/progressBarBackground"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="30dp"
+        tools:ignore="NotSibling" />
+
+    <!-- Today text -->
+    <TextView
+        android:id="@+id/titleToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="TODAY"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Workout Card -->
+    <RelativeLayout
+        android:id="@+id/workoutsWrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleToday"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:background="@drawable/input">
+
+        <TextView
+            android:id="@+id/workoutsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#008080"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="Workouts:"/>
+
+        <TextView
+            android:id="@+id/noWorkouts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/workoutsTitle"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/roboto_light"
+            android:text="No workouts today"/>
+
+        <android.widget.Button
+            android:id="@+id/addWorkoutBtn"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/workoutsTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/loginbutton"
+            android:fontFamily="@font/roboto_light"
+            android:text="Workout now!"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <!-- Food Eaten Card -->
+    <RelativeLayout
+        android:id="@+id/foodWrapper"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/workoutsWrapper"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/foodTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have eaten:"
+            android:textColor="#008080"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/noFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/foodTitle"
+            android:fontFamily="@font/roboto_light"
+            android:text="You didn't ate today!"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:id="@+id/foodEnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/foodTitle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\u2022 60g - boiled egg"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <android.widget.Button
+            android:id="@+id/addFoodBtn"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/foodEnum"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/loginbutton"
+            android:fontFamily="@font/roboto_light"
+            android:text="Click to add meal"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <!-- Recomandation meal -->
+    <RelativeLayout
+        android:id="@+id/recommendedMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodWrapper"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:padding="15dp"
+        android:background="@drawable/input">
+
+        <!-- Todays recomndation is -->
+        <TextView
+            android:id="@+id/todaysMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Today’s meal recommandation is..."/>
+
+        <!-- Meal Title -->
+        <TextView
+            android:id="@+id/recommendedMealTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/todaysMeal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textColor="#C00000"
+            android:text="Beef Steak"/>
+
+        <!-- Meal Content -->
+        <RelativeLayout
+            android:id="@+id/recommendedMealContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recommendedMealTitle"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true">
+
+            <!-- Meal Photo -->
+            <RelativeLayout
+                android:id="@+id/recommendedMealPhoto"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="20dp"
+                android:background="#008080"/>
+
+            <!-- Meal Description -->
+            <RelativeLayout
+                android:id="@+id/recommendedMealDescription"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/recommendedMealPhoto">
+
+                <!-- Meal text -->
+                <TextView
+                    android:id="@+id/recommendedMealText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="This is just an excellent beef steak marinade that adds juiciness and flavour into steaks, transforming economical steaks from just ok to “wow!”."/>
+
+                <!-- Button -->
+                <android.widget.Button
+                    android:id="@+id/fullRecipeBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/recommendedMealText"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/redbutton"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Full Recipe >>"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</ScrollView>
+<!--    <Button-->
+<!--        android:id="@+id/progressBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/divider"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Test" />-->
+

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CEE0E5"
+        tools:context=".HomeScreen">
+
+        <!-- Calorie Circle -->
+        <RelativeLayout
+            android:id="@+id/progressWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <!-- Macro Nutrients Wrapper -->
+        <RelativeLayout
+            android:id="@+id/macroWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressWrapper"
+            android:layout_centerHorizontal="true">
+
+            <!-- Protein Circle -->
+            <RelativeLayout
+                android:id="@+id/proteinWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp" />
+
+            <!-- Fats Circle -->
+            <RelativeLayout
+                android:id="@+id/fatsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/proteinWrapper" />
+
+            <!-- Carbs Circle -->
+            <RelativeLayout
+                android:id="@+id/carbsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/fatsWrapper" />
+        </RelativeLayout>
+
+        <!-- profile picture -->
+        <android.widget.Button
+            android:id="@+id/profilePic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/profile_pic"
+            tools:ignore="NotSibling" />
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexboxLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profilePic"
+            android:layout_centerHorizontal="true">
+
+            <!-- Workout Card -->
+            <RelativeLayout
+                android:id="@+id/weightWrapper"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_below="@+id/profilePic"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="Weight"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/weightValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/weight"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="75 Kg"
+                    android:textColor="#17AFDA"
+                    android:textSize="45sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ageWrapper"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_below="@+id/profilePic"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/weightWrapper"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="Age"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/ageValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/age"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="22 y/o"
+                    android:textColor="#17AFDA"
+                    android:textSize="45sp" />
+
+            </RelativeLayout>
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexboxLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flexboxLayout1"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:id="@+id/sexWrapper"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_below="@+id/weightWrapper"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="Sex"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/sexValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sex"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="Male"
+                    android:textColor="#17AFDA"
+                    android:textSize="45sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/unitWrapper"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_below="@+id/ageWrapper"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/sexWrapper"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="Unit"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/unitValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/unit"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="center"
+                    android:text="kg, ml"
+                    android:textColor="#17AFDA"
+                    android:textSize="45sp" />
+
+            </RelativeLayout>
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/emailWrapper"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/flexboxLayout2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Email"
+                android:textSize="17sp" />
+
+            <android.widget.Button
+                android:id="@+id/emailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@color/cardview_shadow_end_color"
+                android:fontFamily="sans-serif-condensed-light"
+                android:inputType="text"
+                android:text="stefanzota08@gmail.com"
+                android:textColor="#17AFDA" />
+
+        </RelativeLayout>
+
+
+        <android.widget.Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/emailWrapper"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:drawableEnd="@drawable/ic_logout"
+            android:text="logout" />
+
+
+    </RelativeLayout>
+</ScrollView>
+
+

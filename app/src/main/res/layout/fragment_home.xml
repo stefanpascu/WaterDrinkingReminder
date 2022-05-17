@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".HomeScreen"
+        android:background="#CEE0E5">
+
+        <!-- Calorie Circle -->
+        <RelativeLayout
+            android:id="@+id/progressWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/progressBarBackground"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_calorie_bg" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/inner_calorie_circle"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/calorie_circle" />
+
+            <TextView
+                android:id="@+id/nrMl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="1920/2205 ml"
+                android:textColor="#005B74"
+                android:textSize="30sp" />
+
+            <android.widget.Button
+                android:id="@+id/progressBtn"
+                android:layout_width="60dp"
+                android:layout_height="84dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_water_glass"
+                android:drawableEnd="@drawable/ic_baseline_add_circle_outline_home_button_24" />
+
+        </RelativeLayout>
+
+        <!-- Macro Nutrients Wrapper -->
+        <RelativeLayout
+            android:id="@+id/macroWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressWrapper"
+            android:layout_centerHorizontal="true">
+
+            <!-- Protein Circle -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/proteinWrapper"
+                android:layout_marginEnd="10dp"/>
+
+            <!-- Fats Circle -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/proteinWrapper"
+                android:id="@+id/fatsWrapper"
+                android:layout_marginEnd="10dp"/>
+
+            <!-- Carbs Circle -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/fatsWrapper"
+                android:id="@+id/carbsWrapper"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progressBtn"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/loginbutton"
+                android:text="Share"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:drawableEnd="@drawable/ic_share"
+                android:visibility="invisible"
+                tools:ignore="NotSibling" />
+
+        </RelativeLayout>
+
+
+
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/macroWrapper"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Today text -->
+        <TextView
+            android:id="@+id/titleToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="CREATE YOUR SETUP"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Workout Card -->
+        <RelativeLayout
+            android:id="@+id/workoutsWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleToday"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:padding="15dp">
+
+            <android.widget.ImageView
+                android:id="@+id/glassImg"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/ic_water_glass" />
+
+            <View
+                android:id="@+id/subDivider"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/glassImg"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/noWorkouts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/subDivider"
+                android:fontFamily="sans-serif-condensed-light"
+                android:gravity="center"
+                android:text="current size: 200 ml"
+                android:textSize="15sp" />
+
+            <android.widget.Button
+                android:id="@+id/switchCupBtn"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/noWorkouts"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/glassImg"
+                android:background="@drawable/loginbutton"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Pick another cup size"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <!-- Food Eaten Card -->
+        <RelativeLayout
+            android:id="@+id/foodWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/workoutsWrapper"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input"
+            android:elevation="4dp"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/foodTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Remember to drink enough water"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/foodEnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/foodTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="add a reminder "
+                    android:textStyle="bold" />
+
+                <android.widget.ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="15dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/reminder"
+                    android:background="@drawable/ic_alarm_clock"
+                    tools:ignore="NotSibling" />
+
+            </RelativeLayout>
+
+            <android.widget.Button
+                android:id="@+id/addReminderBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/foodEnum"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_baseline_add_circle_outline_lightblue"
+                android:tint="#6BBDD4" />
+
+        </RelativeLayout>
+
+        <!-- Recomandation meal -->
+        <RelativeLayout
+            android:id="@+id/recommendedMeal"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodWrapper"
+            android:layout_marginTop="40dp"
+            android:padding="15dp"
+            >
+
+            <!-- Todays recomndation is -->
+
+
+            <!-- Meal Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+/>
+
+            <!-- Meal Content -->
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>
+
+

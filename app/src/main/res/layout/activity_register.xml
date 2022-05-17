@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register"
+    android:background="@drawable/formgradient">
+
+    <RelativeLayout
+        android:id="@+id/loginWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/loginwrapper"
+        android:elevation="4dp"
+        android:padding="35dp">
+
+        <RelativeLayout
+            android:id="@+id/loginElements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/registerHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="REGISTER"
+                android:textColor="#505050"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/registerHeader"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:fontFamily="@font/roboto_italic"
+                android:hint="Email"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/pwdInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailInput"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input"
+                android:elevation="4dp"
+                android:fontFamily="@font/roboto_italic"
+                android:hint="Password"
+                android:padding="15dp"
+                android:textSize="16sp" />
+
+            <android.widget.Button
+                android:id="@+id/registerBtn"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pwdInput"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/loginbutton"
+                android:fontFamily="@font/roboto_light"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp"
+                android:text="CREATE ACCOUNT"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginElements"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp">
+
+            <TextView
+                android:id="@+id/textInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="Already have an account?"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/goToLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/textInfo"
+                android:fontFamily="@font/roboto_light"
+                android:text="Log in now"
+                android:textColor="#005B74"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
