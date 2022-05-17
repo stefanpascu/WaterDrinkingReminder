@@ -46,10 +46,12 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore firebaseStore;
     String userId;
 
+    Integer cupVolume;
     private ProgressBar progressBar;
     private Button progressButton;
     private TextView nrMl;
     private Button addReminderBtn;
+    private TextView cupVolumeText;
     private int totalMl = 2256; // the nr of kcal the user has to eat today
     private int mlLeft; // the nr of kcal remaining for the day
     private Button shareButton;
@@ -58,7 +60,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
 
-    List<String> moviesList;
+    List<String> cupSizesList;
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
@@ -74,6 +76,7 @@ public class HomeFragment extends Fragment {
         shareButton =  view.findViewById(R.id.shareButton);
         addReminderBtn = view.findViewById(R.id.addReminderBtn);
         switchCupBtn = view.findViewById(R.id.switchCupBtn);
+        cupVolumeText = view.findViewById(R.id.cupVolumeText);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStore = FirebaseFirestore.getInstance();
@@ -82,6 +85,8 @@ public class HomeFragment extends Fragment {
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                cupVolume = Integer.parseInt(documentSnapshot.getString("cupVolume"));
+                cupVolumeText.setText("current size: " + cupVolume + " ml");
                 totalMl = Integer.parseInt(documentSnapshot.getString("intake"));
                 mlLeft = Integer.parseInt(documentSnapshot.getString("intakeLeft"));
                 loadProgress(0);
@@ -89,7 +94,7 @@ public class HomeFragment extends Fragment {
         });
 
         progressBar.setProgress(getPercentage(mlLeft, totalMl));
-        progressButton.setOnClickListener(v -> loadProgress(400));
+        progressButton.setOnClickListener(v -> loadProgress(cupVolume));
         addReminderBtn.setOnClickListener(v -> scheduleNotification(getNotification( "Proba la 5 secunde" ) , 5000 ));
         switchCupBtn.setOnClickListener(v -> goToSwitchCup());
 
