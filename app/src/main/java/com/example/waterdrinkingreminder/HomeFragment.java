@@ -1,5 +1,6 @@
 package com.example.waterdrinkingreminder;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.Notification;
@@ -28,18 +29,28 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseStore;
+    String userId;
 
     private ProgressBar progressBar;
     private Button progressButton;
-    private TextView nrKcal;
+    private TextView nrMl;
     private Button addReminderBtn;
-    private int maxKal = 2256; // the nr of kcal the user has to eat today
-    private int currentKcal; // the nr of kcal remaining for the day
+    private int totalMl = 2256; // the nr of kcal the user has to eat today
+    private int mlLeft; // the nr of kcal remaining for the day
     private Button shareButton;
     private Dialog dialog;
     private Button switchCupBtn;
@@ -56,24 +67,32 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        currentKcal = maxKal;
         progressBar = view.findViewById(R.id.progressBar);
         progressButton = view.findViewById(R.id.progressBtn);
-        nrKcal = view.findViewById(R.id.nrMl);
+        nrMl = view.findViewById(R.id.nrMl);
         shareButton =  view.findViewById(R.id.shareButton);
         addReminderBtn = view.findViewById(R.id.addReminderBtn);
         switchCupBtn = view.findViewById(R.id.switchCupBtn);
 
-        nrKcal.setText("" + currentKcal + "/" + maxKal + "ml");
-        progressBar.setProgress(100);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStore = FirebaseFirestore.getInstance();
+        userId = firebaseAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = firebaseStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                totalMl = Integer.parseInt(documentSnapshot.getString("intake"));
+                mlLeft = Integer.parseInt(documentSnapshot.getString("intakeLeft"));
+                loadProgress(0);
+            }
+        });
+
+        progressBar.setProgress(getPercentage(mlLeft, totalMl));
         progressButton.setOnClickListener(v -> loadProgress(400));
-
         addReminderBtn.setOnClickListener(v -> scheduleNotification(getNotification( "Proba la 5 secunde" ) , 5000 ));
-
         switchCupBtn.setOnClickListener(v -> goToSwitchCup());
 
         return view;
-
     }
 
     private void scheduleNotification (Notification notification , int delay) {
@@ -106,16 +125,18 @@ public class HomeFragment extends Fragment {
     }
 
     // changes the number of kcal remaining based on the meal introduced
-    private void loadProgress(int meal) {
-        int percentage = substractKal(meal);
+    private void loadProgress(int intake) {
+        mlLeft -= intake;
+        int percentage = getPercentage(mlLeft, totalMl);
         if(percentage < 0) {
             percentage = 0;
-            currentKcal = 0;
+            mlLeft = 0;
         }
         progressBar.setProgress(percentage);
-        nrKcal.setText("" + currentKcal + "/" + maxKal + "ml");
-
-        if(currentKcal <= 0) {
+        nrMl.setText("" + mlLeft + "/" + totalMl + "ml");
+        DocumentReference documentReference = firebaseStore.collection("users").document(userId);
+        documentReference.update("intakeLeft", Integer.toString(mlLeft));
+        if(mlLeft <= 0) {
             shareButton.setVisibility(View.VISIBLE);
         } else {
             shareButton.setVisibility(View.INVISIBLE);
@@ -125,7 +146,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I managed to drink the recommended daily amount of "+ (maxKal*1.0)/1000 +" liters of water!");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I managed to drink the recommended daily amount of "+ (totalMl*1.0)/1000 +" liters of water!");
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
@@ -136,14 +157,20 @@ public class HomeFragment extends Fragment {
     }
 
     // substracts the last meal from the total nr of kcal and returns the remaining kcal in percentage value!
-    private int substractKal(int meal) {
-        currentKcal = currentKcal - meal;
-        return ((currentKcal) * 100) / maxKal;
+    private int getPercentage(int mlLeft, int totalMl) {
+        return ((mlLeft) * 100) / totalMl;
     }
 
     public void goToSwitchCup(){
         Intent intent = new Intent(this.getActivity(), SwitchCup.class);
         startActivity(intent);
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();//logout
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
     }
 
 }
