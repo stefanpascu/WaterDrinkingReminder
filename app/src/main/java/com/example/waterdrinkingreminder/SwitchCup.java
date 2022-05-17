@@ -1,12 +1,15 @@
 package com.example.waterdrinkingreminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Telephony;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -21,20 +24,12 @@ public class SwitchCup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Filter your results");
+
         setContentView(R.layout.activity_switch_cup);
 
         moviesList = new ArrayList<>();
         containerList = new ArrayList<>();
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(moviesList, containerList);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        recyclerView.setAdapter(recyclerAdapter);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
 
         moviesList.add("50 ml");
@@ -81,5 +76,35 @@ public class SwitchCup extends AppCompatActivity {
         containerList.add(getDrawable(R.drawable.ic_cup7));
         containerList.add(getDrawable(R.drawable.ic_cup7));
 
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerAdapter = new RecyclerAdapter(moviesList, containerList);
+        recyclerView.setAdapter(recyclerAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.actionSearch);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

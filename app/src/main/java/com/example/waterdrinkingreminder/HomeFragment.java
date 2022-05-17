@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
