@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.waterdrinkingreminder">
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_water_glass"
@@ -9,9 +11,6 @@
         android:roundIcon="@drawable/ic_water_glass"
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrinkingReminder">
-        <activity
-            android:name=".DestinationActivity"
-            android:exported="false" />
         <activity
             android:name=".SwitchCup"
             android:exported="false" />

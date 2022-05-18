@@ -37,7 +37,8 @@
             android:background="@drawable/input"
             android:elevation="4dp"
             android:fontFamily="@font/roboto_italic"
-            android:hint="Height"
+            android:hint="Height (cm)"
+            android:inputType="number"
             android:padding="15dp"
             android:textSize="16sp" />
 
@@ -51,7 +52,8 @@
             android:background="@drawable/input"
             android:elevation="4dp"
             android:fontFamily="@font/roboto_italic"
-            android:hint="Weight"
+            android:hint="Weight (kg)"
+            android:inputType="number"
             android:padding="15dp"
             android:textSize="16sp" />
 

@@ -116,7 +116,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        StorageReference profilePicture = storage.getReferenceFromUrl("gs://waterdrinkingreminder-2530b.appspot.com").child("images/" + userId);
+        StorageReference profilePicture = storage.getReferenceFromUrl("gs://waterdrinkingreminderapp.appspot.com").child("images/" + userId);
         final long ONE_MEGABYTE = 1024 * 1024;
         profilePicture.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
@@ -221,7 +221,7 @@ public class ProfileFragment extends Fragment {
         EditText input = dialog_age.findViewById(R.id.inputAge);
         String updatedAge = input.getText().toString().split(" ")[0];
         DocumentReference documentReference = firebaseStore.collection("users").document(userId);
-        documentReference.update("age", updatedAge);
+        documentReference.update("birthDate", updatedAge);
         ageValue.setText(updatedAge);
         dialog_age.dismiss();
     }
@@ -251,6 +251,7 @@ public class ProfileFragment extends Fragment {
         dialog_sex.dismiss();
     }
 
+
     private void makePhoto(){
         if(ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this.getActivity(), new String[]{
@@ -268,12 +269,12 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             profilePic.setBackground(null);
             profilePic.setImageBitmap(bitmap);
-            Toast.makeText(getContext(), "Proba", Toast.LENGTH_SHORT).show();
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bitmap, "profile", null);
             uploadPhoto(Uri.parse(path));
         }
+
     }
 
     private void uploadPhoto(Uri uriPhoto) {

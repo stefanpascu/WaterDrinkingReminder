@@ -79,6 +79,7 @@ public class Measurements extends AppCompatActivity {
         documentReference.update("weight", weight);
         documentReference.update("birthDate", bd);
         documentReference.update("sex", selectedSex);
+        documentReference.update("cupVolume", "200");
         documentReference.update("intake", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
         documentReference.update("intakeLeft", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
 

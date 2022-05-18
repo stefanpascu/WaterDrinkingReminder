@@ -57,6 +57,7 @@
                 android:elevation="4dp"
                 android:fontFamily="@font/roboto_italic"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:padding="15dp"
                 android:textSize="16sp" />
 

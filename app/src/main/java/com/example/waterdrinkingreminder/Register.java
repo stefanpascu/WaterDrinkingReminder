@@ -114,6 +114,7 @@ public class Register extends AppCompatActivity {
                             user.put("sex", "");
                             user.put("intake", "");
                             user.put("intakeLeft", "");
+                            user.put("cupVolume", "");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

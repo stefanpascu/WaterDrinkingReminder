@@ -166,7 +166,7 @@ public class HomeFragment extends Fragment {
         pendingIntent = PendingIntent.getBroadcast(this.getActivity(),0,intent,0);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY,pendingIntent);
-
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
         Toast.makeText(this.getActivity(), "Alarm set Successfully", Toast.LENGTH_SHORT).show();
 
     }
