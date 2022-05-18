@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_water_glass"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_water_glass"
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterDrinkingReminder">
         <activity

@@ -71,7 +71,9 @@
                 android:id="@+id/profilePic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/profile_pic"/>
+                android:background="@drawable/ic_baseline_account_circle_24"
+                android:scaleType="fitCenter"
+                android:elevation="4dp"/>
         </RelativeLayout>
 
 
@@ -94,29 +96,36 @@
                 android:elevation="4dp"
                 android:padding="15dp">
 
-                <TextView
-                    android:id="@+id/weight"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text="Weight"
-                    android:textSize="25sp" />
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text="Weight"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/weightValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/weight"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#17AFDA"
-                    android:textSize="45sp" />
+                    <TextView
+                        android:id="@+id/weightValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weight"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#17AFDA"
+                        android:textSize="45sp" />
+                </RelativeLayout>
+
+
 
             </RelativeLayout>
 
@@ -130,30 +139,34 @@
                 android:background="@drawable/input"
                 android:elevation="4dp"
                 android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/age"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text="Age"
-                    android:textSize="25sp" />
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text="Age"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/ageValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/age"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#17AFDA"
-                    android:textSize="45sp" />
+                    <TextView
+                        android:id="@+id/ageValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/age"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#17AFDA"
+                        android:textSize="45sp" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -177,30 +190,34 @@
                 android:background="@drawable/input"
                 android:elevation="4dp"
                 android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/sex"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text="Sex"
-                    android:textSize="25sp" />
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/sex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text="Sex"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/sexValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/sex"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#17AFDA"
-                    android:textSize="45sp" />
+                    <TextView
+                        android:id="@+id/sexValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sex"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#17AFDA"
+                        android:textSize="45sp" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -214,30 +231,34 @@
                 android:background="@drawable/input"
                 android:elevation="4dp"
                 android:padding="15dp">
-
-                <TextView
-                    android:id="@+id/unit"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text="Height"
-                    android:textSize="25sp" />
+                    android:layout_centerVertical="true">
+                    <TextView
+                        android:id="@+id/unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text="Height"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/heightValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/unit"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="#17AFDA"
-                    android:textSize="45sp" />
+                    <TextView
+                        android:id="@+id/heightValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/unit"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#17AFDA"
+                        android:textSize="45sp" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
