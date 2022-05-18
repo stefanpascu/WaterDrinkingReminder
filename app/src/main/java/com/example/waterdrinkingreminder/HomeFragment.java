@@ -1,9 +1,9 @@
 package com.example.waterdrinkingreminder;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,33 +11,33 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.waterdrinkingreminder.databinding.ActivityMainBinding;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.protobuf.StringValue;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -50,15 +50,20 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private Button progressButton;
     private TextView nrMl;
-    private Button addReminderBtn;
     private TextView cupVolumeText;
     private int totalMl = 2256; // the nr of kcal the user has to eat today
     private int mlLeft; // the nr of kcal remaining for the day
     private Button shareButton;
     private Dialog dialog;
     private Button switchCupBtn;
+    private Button addReminderBtn;
+    MaterialTimePicker timePicker;
+    LinearLayout alarm;
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
+    Calendar calendar;
+    AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
 
     List<String> cupSizesList;
 
@@ -70,6 +75,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        createNotificationChannel();
         progressBar = view.findViewById(R.id.progressBar);
         progressButton = view.findViewById(R.id.progressBtn);
         nrMl = view.findViewById(R.id.nrMl);
@@ -95,23 +101,104 @@ public class HomeFragment extends Fragment {
 
         progressBar.setProgress(getPercentage(mlLeft, totalMl));
         progressButton.setOnClickListener(v -> loadProgress(cupVolume));
-        addReminderBtn.setOnClickListener(v -> scheduleNotification(getNotification( "Proba la 5 secunde" ) , 5000 ));
+
+        // add notification every 5 seconds
+//        addReminderBtn.setOnClickListener(v -> scheduleNotification(getNotification( "Proba la 5 secunde" ) , 5000 ));
+//        addReminderBtn.setOnClickListener(v -> onReminderBtnClick());
+        addReminderBtn.setOnClickListener(v -> showTimePicker());
+
         switchCupBtn.setOnClickListener(v -> goToSwitchCup());
+
+        alarm = view.findViewById(R.id.layoutList);
 
         return view;
     }
 
-    private void scheduleNotification (Notification notification , int delay) {
-        Intent notificationIntent = new Intent( this.getActivity(), MyNotificationPublisher.class ) ;
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID , 1 ) ;
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION , notification) ;
-        PendingIntent pendingIntent = PendingIntent.getBroadcast ( this.getActivity(), 0 , notificationIntent , PendingIntent.FLAG_UPDATE_CURRENT ) ;
-        long futureInMillis = SystemClock.elapsedRealtime () + delay ;
-        long timeInterval = 60 * 1_000L;
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        assert alarmManager != null;
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP , futureInMillis, timeInterval, pendingIntent);
+    private void showTimePicker() {
+        timePicker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(12)
+                .setMinute(0)
+                .setTitleText("Choose a time for your alarm")
+                .build();
+
+        timePicker.show(getActivity().getSupportFragmentManager(), "foxandroid");
+
+        timePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+                calendar.set(Calendar.MINUTE, timePicker.getMinute());
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+
+                String string1 = String.valueOf(timePicker.getHour());
+                String string2 = String.valueOf(timePicker.getMinute());
+                if (timePicker.getHour() == 0) {
+                    string1 = "00";
+                }
+                if (timePicker.getMinute() == 0) {
+                    string2 = "00";
+                }
+
+                addView(string1 + ":" + string2);
+                setAlarm();
+            }
+        });
+
     }
+
+    private void cancelAlarm() {
+        Intent intent = new Intent(this.getActivity(), MyNotificationPublisher.class);
+        pendingIntent = PendingIntent.getBroadcast(this.getActivity(),0,intent,0);
+        if (alarmManager == null){
+            alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        }
+
+        alarmManager.cancel(pendingIntent);
+        Toast.makeText(this.getActivity(), "Alarm Cancelled", Toast.LENGTH_SHORT).show();
+    }
+
+    private void setAlarm() {
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this.getActivity(), MyNotificationPublisher.class);
+        pendingIntent = PendingIntent.getBroadcast(this.getActivity(),0,intent,0);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,pendingIntent);
+
+        Toast.makeText(this.getActivity(), "Alarm set Successfully", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+
+    private void addView(String time) {
+        View alarmView = getLayoutInflater().inflate(R.layout.row_alarm,null,false);
+        TextView timeText = alarmView.findViewById(R.id.time);
+        timeText.setText(time.toString());
+        Button imageClose = (Button) alarmView.findViewById(R.id.deleteBtn);
+
+        imageClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(alarmView);
+            }
+        });
+
+        alarm.addView(alarmView);
+
+    }
+
+
+    private void removeView(View view){
+        cancelAlarm();
+        alarm.removeView(view);
+
+    }
+
+
 
     private Notification getNotification (String content) {
         Intent intent = new Intent(this.getActivity(), MainActivity.class);
@@ -170,6 +257,23 @@ public class HomeFragment extends Fragment {
     public void goToSwitchCup(){
         Intent intent = new Intent(this.getActivity(), SwitchCup.class);
         startActivity(intent);
+    }
+
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "foxandroidReminderChannel";
+            String description = "Channel For Alarm Manager";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("foxandroid",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+        }
+
+
     }
 
 }
