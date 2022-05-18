@@ -1,5 +1,6 @@
 package com.example.waterdrinkingreminder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,23 +23,33 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseStore;
+    String userId;
 
     private static final String TAG = "RecyclerAdapter";
-    List<String> moviesList;
-    List<String> moviesListAll;
+    List<String> cupSizesList;
+    List<String> cupSizesListAll;
     List<Drawable> containerList;
 
-    public RecyclerAdapter(List<String> moviesList, ArrayList<Drawable> containerList) {
-        this.moviesList = moviesList;
+    public RecyclerAdapter(List<String> cupSizesList, ArrayList<Drawable> containerList) {
+        this.cupSizesList = cupSizesList;
         this.containerList = containerList;
-        moviesListAll = new ArrayList<>();
-        moviesListAll.addAll(moviesList);
+        cupSizesListAll = new ArrayList<>();
+        cupSizesListAll.addAll(cupSizesList);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStore = FirebaseFirestore.getInstance();
 
+        userId = firebaseAuth.getCurrentUser().getUid();
     }
 
     @NonNull
@@ -52,13 +63,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(moviesList.get(position));
+        holder.textView.setText(cupSizesList.get(position));
         holder.imageView.setBackground(containerList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return cupSizesList.size();
     }
 
     @Override
@@ -76,9 +87,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             List<String> filteredList = new ArrayList<>();
 
             if (charSequence == null || charSequence.length() == 0) {
-                filteredList.addAll(moviesListAll);
+                filteredList.addAll(cupSizesListAll);
             } else {
-                for (String movie: moviesListAll) {
+                for (String movie: cupSizesListAll) {
                     if (movie.toLowerCase().contains(charSequence.toString().toLowerCase())) {
                         filteredList.add(movie);
                     }
@@ -93,8 +104,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //Automatic on UI thread
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            moviesList.clear();
-            moviesList.addAll((Collection<? extends String>) filterResults.values);
+            cupSizesList.clear();
+            cupSizesList.addAll((Collection<? extends String>) filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -118,8 +129,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), moviesList.get(getAdapterPosition()) + " container selected", Toast.LENGTH_SHORT).show();
-
+            DocumentReference documentReference = firebaseStore.collection("users").document(userId);
+            documentReference.update("cupVolume", cupSizesList.get(getAdapterPosition()).split(" ")[0]);
+            Toast.makeText(view.getContext(), cupSizesList.get(getAdapterPosition()) + " container selected", Toast.LENGTH_SHORT).show();
         }
 
     }

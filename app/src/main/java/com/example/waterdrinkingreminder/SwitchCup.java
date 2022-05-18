@@ -18,7 +18,7 @@ public class SwitchCup extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
 
-    ArrayList<String> moviesList;
+    ArrayList<String> cupSizesList;
     ArrayList<Drawable> containerList;
 
     @Override
@@ -28,31 +28,31 @@ public class SwitchCup extends AppCompatActivity {
 
         setContentView(R.layout.activity_switch_cup);
 
-        moviesList = new ArrayList<>();
+        cupSizesList = new ArrayList<>();
         containerList = new ArrayList<>();
 
 
-        moviesList.add("50 ml");
-        moviesList.add("75 ml");
-        moviesList.add("100 ml");
-        moviesList.add("125 ml");
-        moviesList.add("150 ml");
-        moviesList.add("175 ml");
-        moviesList.add("200 ml");
-        moviesList.add("225 ml");
-        moviesList.add("250 ml");
-        moviesList.add("275 ml");
-        moviesList.add("300 ml");
-        moviesList.add("325 ml");
-        moviesList.add("350 ml");
-        moviesList.add("375 ml");
-        moviesList.add("400 ml");
-        moviesList.add("425 ml");
-        moviesList.add("450 ml");
-        moviesList.add("475 ml");
-        moviesList.add("500 ml");
-        moviesList.add("750 ml");
-        moviesList.add("1000 ml");
+        cupSizesList.add("50 ml");
+        cupSizesList.add("75 ml");
+        cupSizesList.add("100 ml");
+        cupSizesList.add("125 ml");
+        cupSizesList.add("150 ml");
+        cupSizesList.add("175 ml");
+        cupSizesList.add("200 ml");
+        cupSizesList.add("225 ml");
+        cupSizesList.add("250 ml");
+        cupSizesList.add("275 ml");
+        cupSizesList.add("300 ml");
+        cupSizesList.add("325 ml");
+        cupSizesList.add("350 ml");
+        cupSizesList.add("375 ml");
+        cupSizesList.add("400 ml");
+        cupSizesList.add("425 ml");
+        cupSizesList.add("450 ml");
+        cupSizesList.add("475 ml");
+        cupSizesList.add("500 ml");
+        cupSizesList.add("750 ml");
+        cupSizesList.add("1000 ml");
 
         containerList.add(getDrawable(R.drawable.ic_cup1));
         containerList.add(getDrawable(R.drawable.ic_cup1));
@@ -77,7 +77,7 @@ public class SwitchCup extends AppCompatActivity {
         containerList.add(getDrawable(R.drawable.ic_cup7));
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(moviesList, containerList);
+        recyclerAdapter = new RecyclerAdapter(cupSizesList, containerList);
         recyclerView.setAdapter(recyclerAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);

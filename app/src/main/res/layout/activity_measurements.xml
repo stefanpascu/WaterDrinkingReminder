@@ -65,8 +65,8 @@
             android:background="@drawable/input"
             android:elevation="4dp"
             android:fontFamily="@font/roboto_italic"
-            android:hint="Birth Date (dd-mm-yyyy)"
-            android:inputType="date"
+            android:hint="Age"
+            android:inputType="number"
             android:padding="15dp"
             android:textSize="16sp" />
 

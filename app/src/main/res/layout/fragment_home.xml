@@ -157,7 +157,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/noWorkouts"
+                android:id="@+id/cupVolumeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -172,7 +172,7 @@
                 android:id="@+id/switchCupBtn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_below="@+id/noWorkouts"
+                android:layout_below="@+id/cupVolumeText"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="15dp"
@@ -236,14 +236,23 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:id="@+id/layoutList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/foodEnum"
+                android:orientation="vertical"/>
+
             <android.widget.Button
                 android:id="@+id/addReminderBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/foodEnum"
+                android:layout_below="@+id/layoutList"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="15dp"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/ic_baseline_add_circle_outline_lightblue"
                 android:tint="#6BBDD4" />
 
