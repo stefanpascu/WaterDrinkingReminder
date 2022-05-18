@@ -1,0 +1,82 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="40dp">
+
+    <TextView
+        android:id="@+id/editSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Sex"
+        android:textSize="25sp" />
+
+
+    <RadioGroup
+        android:id="@+id/radioBtnGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editSex"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/maleRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/custom_radio"
+            android:fontFamily="@font/roboto_bold"
+            android:text=" male"
+            android:textColor="#17AFDA"
+            android:textSize="22sp" />
+
+
+        <RadioButton
+            android:id="@+id/femaleRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="false"
+            android:drawableLeft="@drawable/custom_radio"
+            android:fontFamily="@font/roboto_bold"
+            android:text=" female"
+            android:textColor="#17AFDA"
+            android:textSize="22sp" />
+
+    </RadioGroup>
+
+
+
+    <android.widget.Button
+        android:id="@+id/okBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioBtnGroup"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="18dp"
+        android:background="@color/white"
+        android:text="ok"
+        android:textSize="20sp"
+        android:textColor="#17AFDA" />
+
+    <android.widget.Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioBtnGroup"
+        android:layout_marginTop="18dp"
+        android:layout_toLeftOf="@+id/okBtn"
+        android:background="@color/white"
+        android:text="cancel"
+        android:textColor="#17AFDA"
+        android:textSize="20dp" />
+
+</RelativeLayout>
+
+

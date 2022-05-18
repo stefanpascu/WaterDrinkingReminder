@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Measurements extends AppCompatActivity {
-    public static final String TAG = "TAG";
     private EditText heightInput;
     private EditText weightInput;
     private EditText ageInput;
@@ -66,23 +65,6 @@ public class Measurements extends AppCompatActivity {
             }
         });
 
-        userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-        DocumentReference documentReference = firebaseStore.collection("users").document(userID);
-
-        firebaseStore.collection("dynamic_menu").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if (e !=null) {
-
-                }
-
-                for (DocumentChange documentChange : documentSnapshots.getDocumentChanges()) {
-                    emailValue = documentChange.getDocument().getData().get("email").toString();
-                    System.out.println(emailValue);
-                }
-            }
-        });
-
         submitBtn.setOnClickListener(v -> storeMeasurements());
     }
 
@@ -90,31 +72,18 @@ public class Measurements extends AppCompatActivity {
         String height = heightInput.getText().toString().trim();
         String weight = weightInput.getText().toString().trim();
         String bd = ageInput.getText().toString().trim();
-
         userID = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
         DocumentReference documentReference = firebaseStore.collection("users").document(userID);
-        Map<String,Object> user = new HashMap<>();
 
-        user.put("height", height);
-        user.put("weight", weight);
-        user.put("birthDate", bd);
-        user.put("sex", selectedSex);
-        user.put("intake", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
-        user.put("intakeLeft", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
+        documentReference.update("height", height);
+        documentReference.update("weight", weight);
+        documentReference.update("birthDate", bd);
+        documentReference.update("sex", selectedSex);
+        documentReference.update("intake", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
+        documentReference.update("intakeLeft", Integer.toString((Integer.parseInt(weight) * 3 + Integer.parseInt(bd)) * (Integer.parseInt(height)/15)));
 
-        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(Measurements.this, "Measurements stored", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onSuccess: user Measurements stored for "+ userID);
-                goToNextActivity();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure: " + e.toString());
-            }
-        });
+        Toast.makeText(Measurements.this, "Measurements stored", Toast.LENGTH_SHORT).show();
+        goToNextActivity();
     }
 
     public void goToNextActivity(){

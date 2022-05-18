@@ -35,6 +35,7 @@ public class Register extends AppCompatActivity {
     private EditText emailInput;
     private EditText pwdInput;
     String userID;
+    String email;
 
 
     @Override
@@ -62,7 +63,7 @@ public class Register extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = emailInput.getText().toString().trim();
+                email = emailInput.getText().toString().trim();
                 String password = pwdInput.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
@@ -107,6 +108,12 @@ public class Register extends AppCompatActivity {
                             DocumentReference documentReference = firebaseStore.collection("users").document(userID);
                             Map<String,Object> user = new HashMap<>();
                             user.put("email", email);
+                            user.put("height", "");
+                            user.put("weight", "");
+                            user.put("birthDate", "");
+                            user.put("sex", "");
+                            user.put("intake", "");
+                            user.put("intakeLeft", "");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

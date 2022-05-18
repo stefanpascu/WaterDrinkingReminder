@@ -3,6 +3,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        logout();
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() == null){
@@ -51,4 +53,11 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();//logout
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        ((Activity) this).overridePendingTransition(0, 0);
+    }
 }

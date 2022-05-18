@@ -94,11 +94,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/progressBtn"
                 android:layout_marginTop="20dp"
+                android:paddingHorizontal="20dp"
                 android:background="@drawable/loginbutton"
+                android:drawableEnd="@drawable/ic_share"
                 android:text="Share"
                 android:textColor="@color/black"
                 android:textSize="10sp"
-                android:drawableEnd="@drawable/ic_share"
                 android:visibility="invisible"
                 tools:ignore="NotSibling" />
 

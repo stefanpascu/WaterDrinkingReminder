@@ -52,21 +52,34 @@
         </RelativeLayout>
 
         <!-- profile picture -->
-        <android.widget.Button
-            android:id="@+id/profilePic"
+<!--        <android.widget.Button-->
+<!--            android:id="@+id/profilePic"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@drawable/profile_pic"-->
+<!--            tools:ignore="NotSibling" />-->
+        <RelativeLayout
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:background="@drawable/profile_pic"
-            tools:ignore="NotSibling" />
+            android:id="@+id/profilePicWrapper">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profilePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/profile_pic"/>
+        </RelativeLayout>
 
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexboxLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profilePic"
+            android:layout_below="@+id/profilePicWrapper"
             android:layout_centerHorizontal="true">
 
             <!-- Weight Card -->
@@ -101,7 +114,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:gravity="center"
-                    android:text="75 Kg"
+                    android:text=""
                     android:textColor="#17AFDA"
                     android:textSize="45sp" />
 
@@ -138,7 +151,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:gravity="center"
-                    android:text="22 y/o"
+                    android:text=""
                     android:textColor="#17AFDA"
                     android:textSize="45sp" />
 
@@ -185,14 +198,14 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:gravity="center"
-                    android:text="Male"
+                    android:text=""
                     android:textColor="#17AFDA"
                     android:textSize="45sp" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/unitWrapper"
+                android:id="@+id/heightWrapper"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 android:layout_below="@+id/ageWrapper"
@@ -210,11 +223,11 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:gravity="center"
-                    android:text="Unit"
+                    android:text="Height"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/unitValue"
+                    android:id="@+id/heightValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/unit"
@@ -222,7 +235,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:gravity="center"
-                    android:text="kg, ml"
+                    android:text=""
                     android:textColor="#17AFDA"
                     android:textSize="45sp" />
 
@@ -250,14 +263,13 @@
                 android:text="Email"
                 android:textSize="17sp" />
 
-            <android.widget.Button
-                android:id="@+id/emailButton"
+            <TextView
+                android:id="@+id/emailValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@color/cardview_shadow_end_color"
                 android:fontFamily="sans-serif-condensed-light"
-                android:inputType="text"
                 android:text="stefanzota08@gmail.com"
                 android:textColor="#17AFDA" />
 
